@@ -1,0 +1,2511 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Boda de María y Julián | La unión perfecta entre Castellón y Valencia</title>
+  <meta name="description"
+    content="Acompáñanos a la boda de María y Julián el 25 de julio de 2026 en Mas Les Lloses, Sagunt. Celebramos la unión perfecta entre Castellón y Valencia.">
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Dancing+Script:wght@400;600;700&family=Jost:wght@200;300;400;500&display=swap"
+    rel="stylesheet" />
+
+  <style>
+    *,
+    *::before,
+    *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box
+    }
+
+    :root {
+      --gold: #efad55;
+      --amber: #c86733;
+      --burgundy: #64313e;
+      --blush: #e38e8e;
+      --sage: #7a9a6b;
+      --cream: #fdf8f2;
+      --ivory: #f5ede0;
+      --dark: #2a1a1f;
+      --mid: #7a5c62;
+      --light-sage: #d4e4cc;
+      --ff-d: 'Cormorant Garamond', serif;
+      --ff-s: 'Dancing Script', cursive;
+      --ff-b: 'Jost', sans-serif;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      overflow-x: hidden
+    }
+
+    body {
+      background: var(--cream);
+      color: var(--dark);
+      font-family: var(--ff-b);
+      font-weight: 300;
+      overflow-x: hidden;
+      cursor: none
+    }
+
+    /* CURSOR */
+    .cursor {
+      position: fixed;
+      width: 12px;
+      height: 12px;
+      background: var(--gold);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 9999;
+      transform: translate(-50%, -50%);
+      transition: transform .15s ease;
+      mix-blend-mode: multiply
+    }
+
+    .cursor-ring {
+      position: fixed;
+      width: 36px;
+      height: 36px;
+      border: 1.5px solid var(--amber);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 9998;
+      transform: translate(-50%, -50%);
+      transition: width .3s, height .3s
+    }
+
+    /* PETALS */
+    #petalCanvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 1;
+      opacity: .5
+    }
+
+    /* PROGRESS */
+    #progress-bar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 2px;
+      background: linear-gradient(to right, var(--gold), var(--amber));
+      z-index: 200;
+      width: 0%;
+      transition: width .1s
+    }
+
+    /* ── NAV: logo izquierda ── */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      padding: 1.1rem clamp(1.2rem, 4vw, 3rem);
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      transition: background .4s, backdrop-filter .4s;
+    }
+
+    nav.scrolled {
+      background: rgba(253, 248, 242, .93);
+      backdrop-filter: blur(12px);
+      box-shadow: 0 1px 0 rgba(239, 173, 85, .25)
+    }
+
+    .nav-logo {
+      font-family: var(--ff-s);
+      font-size: 1.55rem;
+      color: var(--burgundy);
+      text-decoration: none;
+      cursor: pointer;
+      letter-spacing: .02em;
+      display: flex;
+      align-items: center;
+      gap: .15em;
+    }
+
+    .nav-logo .logo-amp {
+      font-family: 'Dancing Script', cursive;
+      font-weight: 400;
+      font-size: 1.55rem;
+      color: var(--amber);
+      line-height: 1;
+      margin: 0 .05em;
+    }
+
+    .nav-cta {
+      font-family: var(--ff-b);
+      font-size: .65rem;
+      letter-spacing: .25em;
+      text-transform: uppercase;
+      color: var(--burgundy);
+      text-decoration: none;
+      border: 1px solid var(--burgundy);
+      padding: .6rem 1.2rem;
+      transition: all .3s;
+      cursor: pointer;
+      margin-left: auto
+    }
+
+    .nav-cta:hover {
+      background: var(--burgundy);
+      color: var(--cream)
+    }
+
+    /* HERO */
+    .hero {
+      min-height: 80vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      position: relative;
+      background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('img/portada.jpg.jpeg');
+      background-size: cover;
+      background-position: center;
+      overflow: hidden;
+      padding: 5rem 2rem 3rem;
+      z-index: 2
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(239, 173, 85, 0.15), transparent 70%)
+    }
+
+    .hero-ornament {
+      font-family: var(--ff-s);
+      font-size: clamp(1rem, 3vw, 1.4rem);
+      color: var(--gold);
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      opacity: 0;
+      animation: fadeUp .8s ease .2s forwards;
+      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3)
+    }
+
+    .hero-names {
+      font-family: var(--ff-d);
+      font-size: clamp(3.5rem, 11vw, 8.5rem);
+      font-weight: 300;
+      line-height: .92;
+      color: var(--cream);
+      text-align: center;
+      margin: .5rem 0 .6rem;
+      opacity: 0;
+      animation: fadeUp .9s ease .4s forwards;
+      letter-spacing: -.01em;
+      text-shadow: 0 10px 30px rgba(0, 0, 0, 0.4)
+    }
+
+    /* ── & grande y visible en el hero ── */
+    .hero-ampersand {
+      display: block;
+      font-family: var(--ff-d);
+      font-style: italic;
+      font-weight: 300;
+      font-size: clamp(3rem, 10vw, 8rem);
+      color: var(--blush);
+      line-height: .95;
+      opacity: .85;
+      letter-spacing: -.02em;
+    }
+
+    .hero-date {
+      font-family: var(--ff-b);
+      font-size: clamp(.7rem, 1.8vw, .9rem);
+      letter-spacing: .5em;
+      text-transform: uppercase;
+      color: var(--cream);
+      margin-bottom: 2.5rem;
+      opacity: 0;
+      animation: fadeUp .9s ease .6s forwards;
+      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3)
+    }
+
+    .hero-divider {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin: 1.2rem 0;
+      opacity: 0;
+      animation: fadeUp .9s ease .8s forwards
+    }
+
+    .hero-divider span {
+      height: 1px;
+      width: clamp(60px, 12vw, 140px);
+      background: linear-gradient(to right, transparent, var(--gold), transparent)
+    }
+
+    .hero-divider svg {
+      width: 26px;
+      height: 26px;
+      fill: var(--gold);
+      stroke: none
+    }
+
+    .hero-tagline {
+      font-family: var(--ff-d);
+      font-style: italic;
+      font-size: clamp(1rem, 2.5vw, 1.35rem);
+      color: var(--ivory);
+      text-align: center;
+      max-width: 480px;
+      line-height: 1.65;
+      opacity: 0;
+      animation: fadeUp .9s ease 1s forwards;
+      margin-bottom: 3rem;
+      text-shadow: 0 4px 15px rgba(0, 0, 0, 0.3)
+    }
+
+    .scroll-cta {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: .5rem;
+      opacity: 0;
+      animation: fadeUp .9s ease 1.2s forwards;
+      font-family: var(--ff-b);
+      font-size: .7rem;
+      letter-spacing: .3em;
+      text-transform: uppercase;
+      color: var(--cream)
+    }
+
+    .scroll-cta .arrow-down {
+      width: 1px;
+      height: 40px;
+      background: var(--gold);
+      animation: scrollPulse 1.8s ease-in-out infinite
+    }
+
+    /* COUNTDOWN */
+    .countdown-section {
+      background: var(--burgundy);
+      padding: 5rem 2rem;
+      text-align: center;
+      position: relative;
+      z-index: 2;
+      overflow: hidden
+    }
+
+    .countdown-section::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 80% 100% at 50% 0%, rgba(239, 173, 85, .12), transparent)
+    }
+
+    .countdown-label {
+      font-family: var(--ff-s);
+      font-size: clamp(1.5rem, 4vw, 2.2rem);
+      color: var(--gold);
+      margin-bottom: 2.5rem;
+      position: relative
+    }
+
+    .countdown-grid {
+      display: flex;
+      justify-content: center;
+      gap: clamp(1rem, 4vw, 3rem);
+      flex-wrap: wrap;
+      position: relative
+    }
+
+    .countdown-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: .3rem
+    }
+
+    .countdown-num {
+      font-family: var(--ff-d);
+      font-size: clamp(3rem, 9vw, 6.5rem);
+      font-weight: 300;
+      color: var(--cream);
+      line-height: 1;
+      position: relative
+    }
+
+    .countdown-num::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 40%;
+      height: 1px;
+      background: var(--gold);
+      opacity: .5
+    }
+
+    .countdown-unit {
+      font-family: var(--ff-b);
+      font-size: .65rem;
+      letter-spacing: .4em;
+      text-transform: uppercase;
+      color: var(--blush);
+      margin-top: .75rem
+    }
+
+    .countdown-sep {
+      font-family: var(--ff-d);
+      font-size: clamp(2rem, 6vw, 4rem);
+      color: var(--gold);
+      opacity: .4;
+      align-self: center;
+      margin-top: -.5rem
+    }
+
+    /* SECTION */
+    .section {
+      padding: clamp(4rem, 8vw, 8rem) clamp(1.5rem, 6vw, 8rem);
+      position: relative;
+      z-index: 2
+    }
+
+    .section-label {
+      font-family: var(--ff-b);
+      font-size: .7rem;
+      letter-spacing: .5em;
+      text-transform: uppercase;
+      color: var(--sage);
+      text-align: center;
+      margin-bottom: 1rem
+    }
+
+    .section-title {
+      font-family: var(--ff-d);
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      font-weight: 300;
+      color: var(--burgundy);
+      text-align: center;
+      margin-bottom: 3rem;
+      line-height: 1.2
+    }
+
+    .section-title em {
+      font-style: italic;
+      color: var(--amber)
+    }
+
+    .thin-rule {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      justify-content: center;
+      margin-bottom: 3rem
+    }
+
+    .thin-rule::before,
+    .thin-rule::after {
+      content: '';
+      flex: 1;
+      max-width: 120px;
+      height: 1px;
+      background: linear-gradient(to right, transparent, var(--gold))
+    }
+
+    .thin-rule::after {
+      background: linear-gradient(to left, transparent, var(--gold))
+    }
+
+    .thin-rule span {
+      width: 6px;
+      height: 6px;
+      border: 1.5px solid var(--gold);
+      border-radius: 50%;
+      display: block
+    }
+
+    /* HISTORIA */
+    .historia-section {
+      background: var(--ivory)
+    }
+
+    .historia-inner {
+      max-width: 760px;
+      margin: 0 auto;
+      display: grid;
+      gap: 3rem
+    }
+
+    .historia-text {
+      font-size: clamp(1rem, 1.8vw, 1.15rem);
+      line-height: 1.9;
+      color: var(--mid);
+      text-align: center;
+      font-family: var(--ff-d);
+      font-style: italic
+    }
+
+    .historia-quote {
+      font-family: var(--ff-s);
+      font-size: clamp(1.4rem, 3.5vw, 2rem);
+      color: var(--amber);
+      text-align: center;
+      position: relative;
+      padding: 1.5rem 2rem
+    }
+
+    .historia-quote::before,
+    .historia-quote::after {
+      content: '"';
+      font-size: 4rem;
+      color: var(--blush);
+      opacity: .3;
+      position: absolute;
+      line-height: 1
+    }
+
+    .historia-quote::before {
+      top: -.5rem;
+      left: .5rem
+    }
+
+    .historia-quote::after {
+      content: '"';
+      bottom: -1.5rem;
+      right: .5rem
+    }
+
+    /* TIMELINE — solo versión derecha, sin duplicado */
+    .timeline-section {
+      background: var(--cream)
+    }
+
+    .timeline {
+      max-width: 560px;
+      margin: 0 auto;
+      position: relative;
+      padding-left: 3rem
+    }
+
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 18px;
+      top: 0;
+      bottom: 0;
+      width: 1px;
+      background: linear-gradient(to bottom, transparent, var(--gold) 8%, var(--gold) 92%, transparent)
+    }
+
+    .timeline-item {
+      display: grid;
+      grid-template-columns: 36px 1fr;
+      gap: 0 1.25rem;
+      align-items: start;
+      margin-bottom: 2.5rem;
+      padding-left: 0;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity .6s ease, transform .6s ease
+    }
+
+    .timeline-item.visible {
+      opacity: 1;
+      transform: translateY(0)
+    }
+
+    .timeline-dot {
+      width: 36px;
+      height: 36px;
+      background: var(--cream);
+      border: 2px solid var(--gold);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      position: relative;
+      z-index: 1;
+      margin-left: -3rem
+    }
+
+    .timeline-dot svg {
+      width: 15px;
+      height: 15px;
+      stroke: var(--amber);
+      stroke-width: 1.8;
+      fill: none
+    }
+
+    .timeline-content {
+      text-align: left;
+      padding-top: .2rem
+    }
+
+    .timeline-time {
+      font-family: var(--ff-b);
+      font-size: .65rem;
+      letter-spacing: .3em;
+      text-transform: uppercase;
+      color: var(--sage);
+      margin-bottom: .2rem
+    }
+
+    .timeline-event {
+      font-family: var(--ff-d);
+      font-size: clamp(1.05rem, 2.2vw, 1.35rem);
+      color: var(--burgundy);
+      font-weight: 500;
+      line-height: 1.2;
+      margin-bottom: .2rem
+    }
+
+    .timeline-desc {
+      font-size: .8rem;
+      color: var(--mid);
+      line-height: 1.5
+    }
+
+    /* CARRUSEL */
+    .carousel-section {
+      background: var(--ivory);
+      overflow: hidden
+    }
+
+    .carousel-wrap {
+      position: relative;
+      max-width: 500px;
+      margin: 0 auto;
+      overflow: hidden;
+      border-radius: 16px;
+      box-shadow: 0 25px 60px rgba(0,0,0,0.2)
+    }
+
+    .carousel-track {
+      display: flex;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      scrollbar-width: none; /* Hide scrollbar Firefox */
+      -ms-overflow-style: none; /* Hide scrollbar IE/Edge */
+      transition: transform .8s cubic-bezier(.77, 0, .175, 1)
+    }
+
+    .carousel-track::-webkit-scrollbar {
+      display: none; /* Hide scrollbar Chrome/Safari */
+    }
+
+    .carousel-slide {
+      min-width: 100%;
+      width: 100%;
+      position: relative;
+      height: 80vh;
+      overflow: hidden;
+      flex-shrink: 0;
+      scroll-snap-align: center;
+    }
+
+    .carousel-slide img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 6s ease
+    }
+
+    .carousel-slide.active img {
+      transform: scale(1.04)
+    }
+
+    .carousel-placeholder {
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, rgba(239, 173, 85, .15), rgba(122, 154, 107, .2), rgba(100, 49, 62, .12));
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      border: 1px dashed rgba(239, 173, 85, .4)
+    }
+
+    .carousel-placeholder svg {
+      width: 42px;
+      height: 42px;
+      stroke: var(--blush);
+      stroke-width: 1.2;
+      fill: none;
+      opacity: .6
+    }
+
+    .carousel-placeholder span {
+      font-family: var(--ff-b);
+      font-size: .72rem;
+      letter-spacing: .3em;
+      text-transform: uppercase;
+      color: var(--mid);
+      opacity: .7
+    }
+
+    .carousel-placeholder .slide-num {
+      font-family: var(--ff-d);
+      font-size: 3rem;
+      font-weight: 300;
+      color: var(--gold);
+      opacity: .3;
+      line-height: 1
+    }
+
+    .carousel-caption {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 2rem 2.5rem 1.5rem;
+      background: linear-gradient(to top, rgba(42, 26, 31, .65), transparent);
+      opacity: 0;
+      transition: opacity .4s
+    }
+
+    .carousel-slide.active .carousel-caption {
+      opacity: 1
+    }
+
+    .carousel-caption p {
+      font-family: var(--ff-d);
+      font-style: italic;
+      font-size: 1.1rem;
+      color: var(--cream)
+    }
+
+    .carousel-dots {
+      display: flex;
+      justify-content: center;
+      gap: .5rem;
+      margin-top: 1.5rem
+    }
+
+    .carousel-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--blush);
+      opacity: .35;
+      cursor: none;
+      transition: all .3s;
+      border: none;
+      padding: 0
+    }
+
+    .carousel-dot.active {
+      background: var(--gold);
+      opacity: 1;
+      transform: scale(1.4)
+    }
+
+    /* Arrows removed as requested */
+    .carousel-arrows {
+      display: none;
+    }
+
+    /* VENUE */
+    .venue-section {
+      background: var(--cream)
+    }
+
+    .venue-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+      align-items: center;
+      text-align: center
+    }
+
+    .venue-img-wrap {
+      position: relative;
+      overflow: hidden
+    }
+
+    .venue-img-wrap::before {
+      content: '';
+      position: absolute;
+      inset: 12px;
+      border: 1px solid rgba(239, 173, 85, .35);
+      z-index: 1;
+      pointer-events: none
+    }
+
+    .venue-placeholder {
+      width: 100%;
+      aspect-ratio: 4/3;
+      background: linear-gradient(135deg, rgba(122, 154, 107, .2), rgba(239, 173, 85, .15), rgba(100, 49, 62, .1));
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      border: 1px dashed rgba(239, 173, 85, .4)
+    }
+
+    .venue-placeholder svg {
+      width: 40px;
+      height: 40px;
+      stroke: var(--blush);
+      stroke-width: 1.2;
+      fill: none;
+      opacity: .7
+    }
+
+    .venue-placeholder span {
+      font-family: var(--ff-b);
+      font-size: .7rem;
+      letter-spacing: .25em;
+      text-transform: uppercase;
+      color: var(--mid);
+      opacity: .7
+    }
+
+    .venue-tag {
+      position: absolute;
+      bottom: 1.5rem;
+      left: 1.5rem;
+      z-index: 2;
+      background: rgba(253, 248, 242, .9);
+      backdrop-filter: blur(6px);
+      padding: .5rem 1rem;
+      display: flex;
+      align-items: center;
+      gap: .5rem;
+      font-family: var(--ff-b);
+      font-size: .65rem;
+      letter-spacing: .25em;
+      text-transform: uppercase;
+      color: var(--burgundy)
+    }
+
+    .venue-tag svg {
+      width: 14px;
+      height: 14px;
+      stroke: var(--amber);
+      stroke-width: 2;
+      fill: none
+    }
+
+    .venue-info h3 {
+      font-family: var(--ff-d);
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      font-weight: 300;
+      color: var(--burgundy);
+      line-height: 1.2;
+      margin-bottom: .75rem
+    }
+
+    .venue-info h3 em {
+      font-style: italic;
+      color: var(--amber)
+    }
+
+    .venue-info p {
+      font-family: var(--ff-b);
+      font-size: .88rem;
+      color: var(--mid);
+      line-height: 1.8;
+      margin-bottom: 1.5rem
+    }
+
+    .venue-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: .6rem;
+      font-family: var(--ff-b);
+      font-size: .7rem;
+      letter-spacing: .3em;
+      text-transform: uppercase;
+      color: var(--amber);
+      text-decoration: none;
+      cursor: none;
+      border-bottom: 1px solid rgba(200, 103, 51, .3);
+      padding-bottom: .2rem;
+      transition: border-color .3s
+    }
+
+    .venue-cta:hover {
+      border-color: var(--amber)
+    }
+
+    .venue-cta svg {
+      width: 16px;
+      height: 16px;
+      stroke: var(--amber);
+      stroke-width: 2;
+      fill: none
+    }
+
+    /* MUSIC */
+    .music-section {
+      background: var(--dark);
+      padding: 3.5rem clamp(1.5rem, 6vw, 8rem);
+      position: relative;
+      z-index: 2;
+      overflow: hidden
+    }
+
+    .music-section::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 60% 80% at 30% 50%, rgba(239, 173, 85, .07), transparent), radial-gradient(ellipse 40% 60% at 80% 20%, rgba(227, 142, 142, .06), transparent)
+    }
+
+    .music-inner {
+      max-width: 700px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 2rem
+    }
+
+    .music-eyebrow {
+      font-family: var(--ff-b);
+      font-size: .65rem;
+      letter-spacing: .5em;
+      text-transform: uppercase;
+      color: var(--sage)
+    }
+
+    .music-title {
+      font-family: var(--ff-d);
+      font-size: clamp(1.6rem, 4vw, 2.8rem);
+      font-weight: 300;
+      color: var(--cream);
+      text-align: center;
+      line-height: 1.2
+    }
+
+    .music-title em {
+      font-style: italic;
+      color: var(--gold)
+    }
+
+    .music-subtitle {
+      font-family: var(--ff-d);
+      font-style: italic;
+      font-size: 1rem;
+      color: var(--blush);
+      text-align: center;
+      opacity: .8
+    }
+
+    .music-notice {
+      font-family: var(--ff-b);
+      font-size: .72rem;
+      color: rgba(253, 248, 242, .4);
+      text-align: center;
+      letter-spacing: .05em;
+      margin-top: -.5rem
+    }
+
+    .music-player {
+      width: 100%;
+      background: rgba(255, 255, 255, .04);
+      border: 1px solid rgba(239, 173, 85, .2);
+      padding: 1.75rem 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+      position: relative;
+      backdrop-filter: blur(8px)
+    }
+
+    .music-track-info {
+      display: flex;
+      align-items: center;
+      gap: 1.25rem
+    }
+
+    .music-vinyl {
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      background: conic-gradient(#1a1a1a 0deg, #2a2a2a 60deg, #1a1a1a 120deg, #222 180deg, #1a1a1a 240deg, #2a2a2a 300deg, #1a1a1a 360deg);
+      border: 3px solid rgba(239, 173, 85, .25);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      position: relative
+    }
+
+    .music-vinyl::after {
+      content: '';
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      background: var(--dark);
+      border: 2px solid rgba(239, 173, 85, .4);
+      position: absolute
+    }
+
+    .music-vinyl.spinning {
+      animation: spin 2.5s linear infinite
+    }
+
+    .music-track-text {
+      flex: 1;
+      min-width: 0
+    }
+
+    .music-song-name {
+      font-family: var(--ff-d);
+      font-size: 1.15rem;
+      color: var(--cream);
+      font-weight: 500;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis
+    }
+
+    .music-artist {
+      font-family: var(--ff-b);
+      font-size: .72rem;
+      letter-spacing: .2em;
+      color: var(--blush);
+      text-transform: uppercase;
+      margin-top: .2rem
+    }
+
+    .music-controls {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1.5rem
+    }
+
+    .music-btn {
+      background: none;
+      border: none;
+      cursor: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform .2s, opacity .2s;
+      opacity: .6
+    }
+
+    .music-btn:hover {
+      opacity: 1;
+      transform: scale(1.1)
+    }
+
+    .music-btn svg {
+      stroke: var(--cream);
+      fill: none;
+      stroke-width: 1.8;
+      width: 20px;
+      height: 20px
+    }
+
+    .music-btn.play-btn {
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      background: var(--gold);
+      opacity: 1;
+      transition: background .3s, transform .2s
+    }
+
+    .music-btn.play-btn:hover {
+      background: #f7c070;
+      transform: scale(1.08)
+    }
+
+    .music-btn.play-btn svg {
+      stroke: var(--dark);
+      width: 22px;
+      height: 22px
+    }
+
+    .music-progress-wrap {
+      display: flex;
+      flex-direction: column;
+      gap: .4rem
+    }
+
+    .music-progress-bar {
+      width: 100%;
+      height: 3px;
+      background: rgba(255, 255, 255, .1);
+      border-radius: 2px;
+      position: relative;
+      overflow: hidden
+    }
+
+    .music-progress-fill {
+      height: 100%;
+      background: linear-gradient(to right, var(--gold), var(--amber));
+      width: 0%;
+      border-radius: 2px
+    }
+
+    .music-times {
+      display: flex;
+      justify-content: space-between;
+      font-family: var(--ff-b);
+      font-size: .65rem;
+      color: rgba(255, 255, 255, .35);
+      letter-spacing: .05em
+    }
+
+    .music-wave {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 3px;
+      height: 28px
+    }
+
+    .music-wave span {
+      display: block;
+      width: 3px;
+      border-radius: 2px;
+      background: var(--gold);
+      animation: wave 1.2s ease-in-out infinite;
+      opacity: .7
+    }
+
+    .music-wave span:nth-child(1) {
+      height: 8px;
+      animation-delay: 0s
+    }
+
+    .music-wave span:nth-child(2) {
+      height: 18px;
+      animation-delay: .1s
+    }
+
+    .music-wave span:nth-child(3) {
+      height: 24px;
+      animation-delay: .2s
+    }
+
+    .music-wave span:nth-child(4) {
+      height: 14px;
+      animation-delay: .3s
+    }
+
+    .music-wave span:nth-child(5) {
+      height: 22px;
+      animation-delay: .15s
+    }
+
+    .music-wave span:nth-child(6) {
+      height: 10px;
+      animation-delay: .25s
+    }
+
+    .music-wave span:nth-child(7) {
+      height: 20px;
+      animation-delay: .05s
+    }
+
+    .music-wave.paused span {
+      animation-play-state: paused
+    }
+
+    .music-playlist {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: .4rem;
+      max-height: 180px;
+      overflow-y: auto
+    }
+
+    .music-playlist::-webkit-scrollbar {
+      width: 3px
+    }
+
+    .music-playlist::-webkit-scrollbar-thumb {
+      background: rgba(239, 173, 85, .3);
+      border-radius: 2px
+    }
+
+    .playlist-item {
+      display: flex;
+      align-items: center;
+      gap: .75rem;
+      padding: .5rem .75rem;
+      border-radius: 2px;
+      cursor: none;
+      transition: background .2s;
+      border: 1px solid transparent
+    }
+
+    .playlist-item:hover {
+      background: rgba(255, 255, 255, .05)
+    }
+
+    .playlist-item.playing {
+      background: rgba(239, 173, 85, .08);
+      border-color: rgba(239, 173, 85, .2)
+    }
+
+    .playlist-num {
+      font-family: var(--ff-b);
+      font-size: .65rem;
+      color: rgba(255, 255, 255, .25);
+      width: 16px;
+      text-align: center
+    }
+
+    .playlist-item.playing .playlist-num {
+      color: var(--gold)
+    }
+
+    .playlist-name {
+      font-family: var(--ff-b);
+      font-size: .8rem;
+      color: rgba(255, 255, 255, .6);
+      flex: 1
+    }
+
+    .playlist-item.playing .playlist-name {
+      color: var(--cream)
+    }
+
+    .playlist-dur {
+      font-family: var(--ff-b);
+      font-size: .65rem;
+      color: rgba(255, 255, 255, .25)
+    }
+
+    /* youtube hidden iframe */
+    #yt-iframe {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      opacity: 0;
+      pointer-events: none;
+      top: -9999px
+    }
+
+    /* DETALLES */
+    .details-section {
+      background: var(--ivory)
+    }
+
+    .accordion {
+      max-width: 720px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: .75rem
+    }
+
+    .accordion-item {
+      border: 1px solid rgba(239, 173, 85, .4);
+      overflow: hidden;
+      transition: border-color .3s
+    }
+
+    .accordion-item:hover {
+      border-color: var(--gold)
+    }
+
+    .accordion-trigger {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.25rem 1.75rem;
+      background: transparent;
+      cursor: none;
+      border: none;
+      outline: none;
+      text-align: left;
+      gap: 1rem
+    }
+
+    .accordion-trigger-left {
+      display: flex;
+      align-items: center;
+      gap: 1rem
+    }
+
+    .accordion-icon-wrap {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: rgba(239, 173, 85, .1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0
+    }
+
+    .accordion-icon-wrap svg {
+      width: 18px;
+      height: 18px;
+      stroke: var(--amber);
+      stroke-width: 1.8;
+      fill: none
+    }
+
+    .accordion-title {
+      font-family: var(--ff-d);
+      font-size: clamp(1rem, 2vw, 1.2rem);
+      color: var(--burgundy);
+      font-weight: 500
+    }
+
+    .accordion-chevron {
+      width: 20px;
+      height: 20px;
+      stroke: var(--amber);
+      stroke-width: 2;
+      fill: none;
+      transition: transform .4s cubic-bezier(.25, .46, .45, .94);
+      flex-shrink: 0
+    }
+
+    .accordion-item.open .accordion-chevron {
+      transform: rotate(180deg)
+    }
+
+    .accordion-body {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height .5s cubic-bezier(.25, .46, .45, .94)
+    }
+
+    .accordion-body-inner {
+      padding: 0 1.75rem 1.75rem;
+      font-size: .9rem;
+      line-height: 1.8;
+      color: var(--mid);
+      font-family: var(--ff-b);
+      font-weight: 300
+    }
+
+    .accordion-body-inner strong {
+      font-weight: 500;
+      color: var(--burgundy)
+    }
+
+    .accordion-body-inner a {
+      color: var(--amber);
+      text-decoration: none;
+      border-bottom: 1px solid rgba(200, 103, 51, .3);
+      transition: border-color .2s
+    }
+
+    .accordion-body-inner a:hover {
+      border-color: var(--amber)
+    }
+
+    /* RSVP */
+    .rsvp-section {
+      background: var(--burgundy);
+      padding: clamp(4rem, 8vw, 8rem) clamp(1.5rem, 6vw, 8rem);
+      position: relative;
+      overflow: hidden;
+      z-index: 2
+    }
+
+    .rsvp-section::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 70% 60% at 20% 80%, rgba(239, 173, 85, .08), transparent), radial-gradient(ellipse 50% 40% at 80% 20%, rgba(227, 142, 142, .08), transparent)
+    }
+
+    .rsvp-section .section-title {
+      color: var(--cream)
+    }
+
+    .rsvp-section .section-label {
+      color: var(--blush)
+    }
+
+    .rsvp-form {
+      max-width: 580px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+      position: relative
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.25rem
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: .4rem
+    }
+
+    .form-label {
+      font-family: var(--ff-b);
+      font-size: .65rem;
+      letter-spacing: .35em;
+      text-transform: uppercase;
+      color: var(--blush)
+    }
+
+    .form-input,
+    .form-select,
+    .form-textarea {
+      background: rgba(255, 255, 255, .06);
+      border: 1px solid rgba(239, 173, 85, .3);
+      color: var(--cream);
+      font-family: var(--ff-b);
+      font-weight: 300;
+      font-size: .9rem;
+      padding: .85rem 1.1rem;
+      outline: none;
+      transition: border-color .3s, background .3s;
+      -webkit-appearance: none;
+      appearance: none;
+      border-radius: 0
+    }
+
+    .form-input::placeholder,
+    .form-textarea::placeholder {
+      color: rgba(253, 248, 242, .3)
+    }
+
+    .form-input:focus,
+    .form-select:focus,
+    .form-textarea:focus {
+      border-color: var(--gold);
+      background: rgba(255, 255, 255, .1)
+    }
+
+    .form-input.error {
+      border-color: var(--blush) !important
+    }
+
+    .form-select {
+      cursor: none;
+      color: var(--cream)
+    }
+
+    .form-select option {
+      background: var(--burgundy);
+      color: var(--cream)
+    }
+
+    .form-textarea {
+      resize: vertical;
+      min-height: 80px
+    }
+
+    .attendance-toggle {
+      display: flex;
+      gap: .5rem;
+      margin-top: .25rem;
+      flex-wrap: wrap
+    }
+
+    .toggle-btn {
+      flex: 1;
+      min-width: 120px;
+      padding: .7rem;
+      border: 1px solid rgba(239, 173, 85, .3);
+      background: transparent;
+      color: rgba(253, 248, 242, .6);
+      font-family: var(--ff-b);
+      font-size: .72rem;
+      letter-spacing: .15em;
+      text-transform: uppercase;
+      cursor: none;
+      outline: none;
+      transition: all .3s
+    }
+
+    .toggle-btn.selected {
+      background: var(--gold);
+      color: var(--dark);
+      border-color: var(--gold)
+    }
+
+    .toggle-btn-no {
+      flex: 1;
+      min-width: 160px;
+      padding: .7rem;
+      border: 1px solid rgba(227, 142, 142, .3);
+      background: transparent;
+      color: rgba(253, 248, 242, .5);
+      font-family: var(--ff-b);
+      font-size: .65rem;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      cursor: none;
+      outline: none;
+      transition: all .3s
+    }
+
+    .toggle-btn-no.selected,
+    .toggle-btn-no:hover {
+      background: rgba(227, 142, 142, .2);
+      color: var(--blush);
+      border-color: var(--blush)
+    }
+
+    /* companions dynamic fields */
+    .companions-wrap {
+      display: flex;
+      flex-direction: column;
+      gap: .75rem;
+      margin-top: .25rem
+    }
+
+    .companion-input-wrap {
+      position: relative
+    }
+
+    .companion-label-inline {
+      font-family: var(--ff-b);
+      font-size: .6rem;
+      letter-spacing: .25em;
+      text-transform: uppercase;
+      color: rgba(253, 248, 242, .4);
+      margin-bottom: .3rem;
+      display: block
+    }
+
+    .rsvp-submit {
+      width: 100%;
+      padding: 1.1rem;
+      margin-top: .5rem;
+      background: var(--gold);
+      color: var(--dark);
+      border: none;
+      font-family: var(--ff-b);
+      font-size: .75rem;
+      letter-spacing: .5em;
+      text-transform: uppercase;
+      font-weight: 500;
+      cursor: none;
+      position: relative;
+      overflow: hidden;
+      transition: background .3s, transform .2s
+    }
+
+    .rsvp-submit::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) scale(0);
+      width: 200%;
+      aspect-ratio: 1;
+      background: rgba(255, 255, 255, .15);
+      border-radius: 50%;
+      transition: transform .5s ease
+    }
+
+    .rsvp-submit:hover::before {
+      transform: translate(-50%, -50%) scale(1)
+    }
+
+    .rsvp-submit:hover {
+      background: #f7c070
+    }
+
+    .rsvp-submit:active {
+      transform: scale(.98)
+    }
+
+    .rsvp-success {
+      text-align: center;
+      padding: 3rem;
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem
+    }
+
+    .rsvp-success svg {
+      width: 60px;
+      height: 60px;
+      stroke: var(--gold);
+      stroke-width: 1.2;
+      fill: none
+    }
+
+    .rsvp-success h3 {
+      font-family: var(--ff-d);
+      font-style: italic;
+      font-size: 2rem;
+      color: var(--cream)
+    }
+
+    .rsvp-success p {
+      font-size: .9rem;
+      color: var(--blush);
+      line-height: 1.7
+    }
+
+    /* FOOTER */
+    .footer {
+      background: var(--dark);
+      padding: 4rem 2rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      z-index: 2
+    }
+
+    .footer-names {
+      font-family: var(--ff-s);
+      font-size: clamp(2rem, 6vw, 3.5rem);
+      color: var(--gold);
+      margin-bottom: .75rem
+    }
+
+    .footer-date {
+      font-family: var(--ff-b);
+      font-size: .7rem;
+      letter-spacing: .5em;
+      text-transform: uppercase;
+      color: var(--mid);
+      margin-bottom: 2rem
+    }
+
+    .footer-divider {
+      width: 60px;
+      height: 1px;
+      background: var(--gold);
+      margin: 0 auto 1.5rem
+    }
+
+    .footer-note {
+      font-family: var(--ff-d);
+      font-style: italic;
+      font-size: 1rem;
+      color: rgba(255, 255, 255, .35);
+      line-height: 1.7
+    }
+
+    .footer-hearts {
+      display: flex;
+      justify-content: center;
+      gap: .5rem;
+      margin-top: 2rem
+    }
+
+    .footer-hearts span {
+      width: 8px;
+      height: 8px;
+      background: var(--blush);
+      display: block;
+      transform: rotate(45deg);
+      opacity: .4
+    }
+
+    .footer-hearts span:nth-child(2) {
+      transform: rotate(45deg) scale(1.5);
+      opacity: .6
+    }
+
+    /* ANIMATIONS */
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(24px)
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0)
+      }
+    }
+
+    @keyframes scrollPulse {
+
+      0%,
+      100% {
+        transform: scaleY(1);
+        opacity: .7
+      }
+
+      50% {
+        transform: scaleY(1.3);
+        opacity: 1
+      }
+    }
+
+    @keyframes wave {
+
+      0%,
+      100% {
+        transform: scaleY(1)
+      }
+
+      50% {
+        transform: scaleY(.35)
+      }
+    }
+
+    @keyframes spin {
+      to {
+        transform: rotate(360deg)
+      }
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity .7s ease, transform .7s ease
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0)
+    }
+
+    .reveal-left {
+      opacity: 0;
+      transform: translateX(-40px);
+      transition: opacity .8s ease, transform .8s ease
+    }
+
+    .reveal-left.visible {
+      opacity: 1;
+      transform: translateX(0)
+    }
+
+    .reveal-right {
+      opacity: 0;
+      transform: translateX(40px);
+      transition: opacity .8s ease, transform .8s ease
+    }
+
+    .reveal-right.visible {
+      opacity: 1;
+      transform: translateX(0)
+    }
+
+    /* DOS CIUDADES — sección creativa */
+    .cities-section {
+      position: relative;
+      overflow: hidden;
+      z-index: 2;
+      background: var(--burgundy);
+      min-height: 90vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: clamp(4rem, 8vw, 8rem) clamp(1.5rem, 5vw, 6rem);
+    }
+
+    .cities-content {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      max-width: 1000px;
+      margin: 0 auto
+    }
+
+    .cities-eyebrow {
+      font-family: var(--ff-b);
+      font-size: .68rem;
+      letter-spacing: .5em;
+      text-transform: uppercase;
+      color: var(--sage);
+      text-align: center;
+      margin-bottom: 1rem
+    }
+
+    .cities-headline {
+      font-family: var(--ff-d);
+      font-size: clamp(2rem, 5vw, 4rem);
+      font-weight: 300;
+      color: var(--cream);
+      text-align: center;
+      line-height: 1.15;
+      margin-bottom: .5rem;
+      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5)
+    }
+
+    .cities-headline em {
+      font-style: italic;
+      color: var(--gold)
+    }
+
+    .cities-sub {
+      font-family: var(--ff-d);
+      font-style: italic;
+      font-size: 1.05rem;
+      color: var(--blush);
+      text-align: center;
+      opacity: .9;
+      margin-bottom: 4rem;
+      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5)
+    }
+
+    /* MAP BRIDGE */
+    .cities-map {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0;
+      width: 100%;
+      position: relative
+    }
+
+    .city-card {
+      flex: 0 0 280px;
+      max-width: 280px;
+      background: rgba(0, 0, 0, 0.3);
+      border: 1px solid rgba(255, 255, 255, .15);
+      padding: 2.5rem 2rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+      backdrop-filter: blur(8px);
+      transition: transform .4s ease, box-shadow .4s ease;
+      position: relative;
+      overflow: hidden;
+      border-radius: 6px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3)
+    }
+
+    .city-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+    }
+
+    .city-card.castellon::before {
+      background: linear-gradient(to right, #1a6b9a, #4ab3e0)
+    }
+
+    .city-card.valencia::before {
+      background: linear-gradient(to right, #e05c1a, #f7a94b)
+    }
+
+    .city-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 24px 60px rgba(0, 0, 0, .45)
+    }
+
+    .city-icon {
+      width: 72px;
+      height: 72px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+      border: 1.5px solid rgba(255, 255, 255, .2);
+      color: var(--cream);
+      font-family: var(--ff-d)
+    }
+
+    .city-card.castellon .city-icon {
+      background: rgba(26, 107, 154, .4)
+    }
+
+    .city-card.valencia .city-icon {
+      background: rgba(224, 92, 26, .4)
+    }
+
+    .city-name {
+      font-family: var(--ff-d);
+      font-size: 1.9rem;
+      font-weight: 300;
+      color: var(--cream);
+      letter-spacing: .02em
+    }
+
+    .city-desc {
+      font-family: var(--ff-b);
+      font-size: .82rem;
+      color: rgba(255, 255, 255, .8);
+      text-align: center;
+      line-height: 1.7
+    }
+
+    .cities-bridge {
+      flex: 1;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-width: 200px
+    }
+
+    @media(max-width:700px) {
+      .cities-map {
+        flex-direction: column;
+        gap: 2rem
+      }
+
+      .cities-bridge {
+        width: 100%;
+        height: auto;
+        min-width: 100%
+      }
+    }
+
+    /* Micro-animación Sí Quiero */
+    .toggle-btn#btn-si {
+      transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    .toggle-btn#btn-si:hover {
+      transform: scale(1.05);
+      background: var(--gold);
+      color: var(--dark);
+      box-shadow: 0 4px 15px rgba(239, 173, 85, 0.4);
+      border-color: var(--gold);
+    }
+
+    .toggle-btn#btn-si.selected {
+      transform: scale(1.05);
+      box-shadow: 0 0 20px rgba(239, 173, 85, 0.6);
+    }
+
+
+
+    /* RESPONSIVE */
+    @media(max-width:768px) {
+      .venue-inner {
+        grid-template-columns: 1fr
+      }
+
+      .form-row {
+        grid-template-columns: 1fr
+      }
+
+      .countdown-sep {
+        display: none
+      }
+
+      .timeline {
+        padding-left: 2rem
+      }
+
+      .timeline::before {
+        left: 14px
+      }
+
+      .timeline-dot {
+        margin-left: -2.1rem;
+        width: 30px;
+        height: 30px
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div id="progress-bar"></div>
+  <div class="cursor" id="cursor"></div>
+  <div class="cursor-ring" id="cursorRing"></div>
+
+  <!-- YouTube iframe oculto para reproducir música real -->
+  <iframe id="yt-iframe" src="" allow="autoplay" tabindex="-1"></iframe>
+
+  <!-- NAV: logo izquierda con & visible -->
+  <nav id="navbar">
+    <a class="nav-logo" href="#">
+      María <span class="logo-amp">&amp;</span> Julian
+    </a>
+    <a class="nav-cta" href="#rsvp">Confirmar Asistencia</a>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero" id="home">
+    <p class="hero-ornament">Os invitamos a nuestra boda</p>
+    <h1 class="hero-names">
+      <em>María</em> <span style="font-family:'Dancing Script', cursive; color:var(--gold);">&amp;</span> Julian
+    </h1>
+    <p class="hero-date">Sábado · 25 de julio de 2026 · </p>
+    <p class="hero-tagline">"Dos almas, una historia, un día que no olvidaremos jamás.<br />Queremos compartirlo
+      contigo."</p>
+    <div class="scroll-cta">
+      <span>Descubre</span>
+      <div class="arrow-down"></div>
+    </div>
+  </section>
+
+  <!-- COUNTDOWN -->
+  <section class="countdown-section">
+    <p class="countdown-label">Faltan...</p>
+    <div class="countdown-grid">
+      <div class="countdown-item"><span class="countdown-num" id="cd-days">000</span><span
+          class="countdown-unit">Días</span></div>
+      <div class="countdown-sep">:</div>
+      <div class="countdown-item"><span class="countdown-num" id="cd-hours">00</span><span
+          class="countdown-unit">Horas</span></div>
+      <div class="countdown-sep">:</div>
+      <div class="countdown-item"><span class="countdown-num" id="cd-mins">00</span><span
+          class="countdown-unit">Minutos</span></div>
+      <div class="countdown-sep">:</div>
+      <div class="countdown-item"><span class="countdown-num" id="cd-secs">00</span><span
+          class="countdown-unit">Segundos</span></div>
+    </div>
+  </section>
+
+  <!-- HISTORIA -->
+  <section class="section historia-section" id="historia">
+    <p class="section-label">Cómo empezó todo</p>
+    <h2 class="section-title">Nuestra <em>historia</em></h2>
+    <div class="thin-rule"><span></span></div>
+    <div class="historia-inner">
+      <p class="historia-text">Todo comenzó un día de verano, en un pequeño pueblo de Valencia. Ella, de Castellón; él,
+        sin imaginar que aquella noche cambiaría todo. Lo que parecía un encuentro cualquiera se convirtió en el inicio
+        de algo mucho más grande: 11 años de risas, viajes, momentos compartidos, y un camino recorrido juntos. Y de
+        nuevo en una tarde de verano, después de todos estos años construyendo nuestra historia, queremos dar el paso
+        más bonito, rodeados de las personas que más queremos. Gracias por ser parte de este viaje.</p>
+    </div>
+  </section>
+
+
+
+  <!-- UNION DE CIUDADES -->
+  <section class="cities-section" id="union">
+    <div class="cities-content reveal">
+      <p class="cities-eyebrow">Dos Orígenes, Un Destino</p>
+      <h2 class="cities-headline">La unión de <em>Castellón</em> y <em>Valencia</em></h2>
+      <p class="cities-sub" style="margin-bottom:3rem; font-size:1.1rem;">Kilómetros que se reducen a cero.</p>
+
+      <div class="cities-big-image reveal"
+        style="width:100%; border-radius:8px; overflow:hidden; box-shadow:0 15px 40px rgba(0,0,0,0.3);">
+        <img src="img/boda5.jpg.jpeg" alt="La Unión"
+          style="width:100%; height:90vh; object-fit:cover; display:block;">
+      </div>
+    </div>
+  </section>
+
+  <!-- VENUE -->
+  <section class="section venue-section" id="lugar" style="position:relative; overflow:hidden;">
+    <canvas id="petalCanvas"
+      style="position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:1;opacity:0.6;"></canvas>
+    <div style="position:relative; z-index:2;">
+      <p class="section-label">Donde nace el sí</p>
+      <h2 class="section-title">Mas Les <em>Lloses</em></h2>
+      <div class="thin-rule"><span></span></div>
+      <div class="venue-inner reveal">
+        <div class="venue-img-wrap"
+          style="width:100%; border-radius:4px; overflow:hidden; box-shadow:0 15px 40px rgba(0,0,0,0.15);">
+          <img src="img/boda.jpg.jpeg" alt="Mas Les Lloses"
+            style="width:100%; height:350px; object-fit:cover; display:block;">
+          <div class="venue-tag">
+            <svg viewBox="0 0 24 24">
+              <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" />
+              <circle cx="12" cy="9" r="2.5" />
+            </svg>
+            Sagunt, Valencia
+          </div>
+        </div>
+        <div class="venue-info">
+          <h3>Un rincón <em>mágico</em><br />entre naranjos y cielo</h3>
+          <p>Enclavado entre los campos valencianos, Mas Les Lloses es un espacio donde el tiempo se detiene.<br />Sus
+            jardines mediterráneos, la piedra antigua y la luz dorada del atardecer crean el escenario perfecto para el
+            día más especial de nuestras vidas.</p>
+          <p>Carrer Camí de Lliria, 46500 Sagunt, Valencia</p>
+          <a class="venue-cta"
+            href="https://www.google.com/maps/dir//Mas+Les+Lloses,+Carrer+Camí+de+Lliria,+46500+Sagunt,+Valencia"
+            target="_blank">
+            Cómo llegar <svg viewBox="0 0 24 24">
+              <path d="M5 12h14M12 5l7 7-7 7" />
+            </svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROGRAMA — única columna, sin duplicado -->
+  <section class="section timeline-section" id="programa">
+    <p class="section-label">25 de julio de 2026</p>
+    <h2 class="section-title">El <em>programa</em> del día</h2>
+    <div class="thin-rule"><span></span></div>
+    <div class="timeline">
+
+      <div class="timeline-item reveal">
+        <div class="timeline-dot"><svg viewBox="0 0 24 24">
+            <path
+              d="M12 21.593c-5.63-5.539-11-10.297-11-14.402 0-3.791 3.068-5.191 5.281-5.191 1.312 0 4.151.501 5.719 4.457 1.59-3.968 4.464-4.447 5.726-4.447 2.54 0 5.274 1.621 5.274 5.181 0 4.069-5.136 8.625-11 14.402z" />
+          </svg></div>
+        <div class="timeline-content">
+          <p class="timeline-time">18:30 h</p>
+          <p class="timeline-event">Recepción invitados</p>
+          <p class="timeline-desc">Bienvenidos a nuestra celebración</p>
+        </div>
+      </div>
+
+      <div class="timeline-item reveal">
+        <div class="timeline-dot"><svg viewBox="0 0 24 24">
+            <path d="M9 2h6m-3 0v4M5 6h14l-1 14H6L5 6zM10 10v6M14 10v6" />
+          </svg></div>
+        <div class="timeline-content">
+          <p class="timeline-time">19:00 h</p>
+          <p class="timeline-event">Ceremonia</p>
+          <p class="timeline-desc">El momento más esperado en los jardines de Mas Les Lloses</p>
+        </div>
+      </div>
+
+      <div class="timeline-item reveal">
+        <div class="timeline-dot"><svg viewBox="0 0 24 24">
+            <path d="M3 12h18M3 6h18M3 18h18" />
+          </svg></div>
+        <div class="timeline-content">
+          <p class="timeline-time">20:00 h</p>
+          <p class="timeline-event">Cóctel</p>
+          <p class="timeline-desc">Brindis, música, canapés y los primeros recuerdos juntos</p>
+        </div>
+      </div>
+
+      <div class="timeline-item reveal">
+        <div class="timeline-dot"><svg viewBox="0 0 24 24">
+            <circle cx="12" cy="12" r="3" />
+            <path d="M12 3v2M12 19v2M3 12h2M19 12h2" />
+          </svg></div>
+        <div class="timeline-content">
+          <p class="timeline-time">21:30 h</p>
+          <p class="timeline-event">Banquete nupcial</p>
+          <p class="timeline-desc">Mesa larga, risas, conversación y buen vino valenciano</p>
+        </div>
+      </div>
+
+      <div class="timeline-item reveal">
+        <div class="timeline-dot"><svg viewBox="0 0 24 24">
+            <path d="M9 18V5l12-2v13" />
+            <circle cx="6" cy="18" r="3" />
+            <circle cx="18" cy="16" r="3" />
+          </svg></div>
+        <div class="timeline-content">
+          <p class="timeline-time">00:00 h</p>
+          <p class="timeline-event">Fiesta</p>
+          <p class="timeline-desc">La noche es joven. La pista de baile, nuestra.</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+
+
+  <!-- DETALLES -->
+  <section class="section details-section" id="detalles">
+    <p class="section-label">Todo lo que necesitas saber</p>
+    <h2 class="section-title">Los <em>detalles</em></h2>
+    <div class="thin-rule"><span></span></div>
+    <div class="accordion">
+
+      <div class="accordion-item">
+        <button class="accordion-trigger" onclick="toggleAccordion(this)">
+          <div class="accordion-trigger-left">
+            <div class="accordion-icon-wrap"><svg viewBox="0 0 24 24">
+                <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z" />
+                <path d="M9 22V12h6v10" />
+              </svg></div><span class="accordion-title">El lugar: Mas Les Lloses</span>
+          </div>
+          <svg class="accordion-chevron" viewBox="0 0 24 24">
+            <path d="M6 9l6 6 6-6" />
+          </svg>
+        </button>
+        <div class="accordion-body">
+          <div class="accordion-body-inner">
+            <strong>Dirección:</strong> Carrer Camí de Lliria, 46500 Sagunt, Valencia<br /><br />
+            Una finca encantadora rodeada de naturaleza valenciana. El espacio combina arquitectura rural con jardines
+            mediterráneos que crean un entorno íntimo y emotivo para nuestra celebración.<br /><br />
+            <a href="https://www.google.com/maps/dir//Mas+Les+Lloses,+Carrer+Camí+de+Lliria,+46500+Sagunt,+Valencia"
+              target="_blank">Ver en Google Maps →</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="accordion-item">
+        <button class="accordion-trigger" onclick="toggleAccordion(this)">
+          <div class="accordion-trigger-left">
+            <div class="accordion-icon-wrap"><svg viewBox="0 0 24 24">
+                <rect x="3" y="4" width="18" height="18" rx="2" />
+                <path d="M16 2v4M8 2v4M3 10h18" />
+              </svg></div><span class="accordion-title">Fecha y horario</span>
+          </div>
+          <svg class="accordion-chevron" viewBox="0 0 24 24">
+            <path d="M6 9l6 6 6-6" />
+          </svg>
+        </button>
+        <div class="accordion-body">
+          <div class="accordion-body-inner">
+            <strong>Sábado 25 de julio de 2026</strong><br /><br />
+            🕧 18:30 h — Recepción invitados<br />
+            🕧 19:00 h — Ceremonia<br />
+            🌅 Hasta que las estrellas digan basta<br /><br />
+            Te recomendamos llegar con 15 minutos de antelación para acomodarte con calma.
+          </div>
+        </div>
+      </div>
+
+      <div class="accordion-item">
+        <button class="accordion-trigger" onclick="toggleAccordion(this)">
+          <div class="accordion-trigger-left">
+            <div class="accordion-icon-wrap"><svg viewBox="0 0 24 24">
+                <path d="M19 17H5c-1.1 0-2-.9-2-2V7c0-1.1.9-2 2-2h14c1.1 0 2 .9 2 2v8c0 1.1-.9 2-2 2z" />
+              </svg></div><span class="accordion-title">Cómo llegar y aparcamiento</span>
+          </div>
+          <svg class="accordion-chevron" viewBox="0 0 24 24">
+            <path d="M6 9l6 6 6-6" />
+          </svg>
+        </button>
+        <div class="accordion-body">
+          <div class="accordion-body-inner">
+            <strong>En coche desde Castellón:</strong> Por la AP-7 o A-7 dirección sur hacia Valencia, toma la salida
+            hacia Sagunt. (Tiempo estimado: 40 min).<br /><br />
+            <strong>En coche desde Valencia:</strong> Por la A-7 dirección norte hacia Sagunt. Seguid indicaciones a
+            Camí de Lliria. (Tiempo estimado: 30 min).<br /><br />
+            <strong>Aparcamiento:</strong> Parking gratuito en la propia finca.<br /><br />
+            <strong>Bus lanzadera:</strong> Disponemos de autobuses desde Castellón y Valencia. Podrás confirmarlo en el
+            formulario de asistencia.<br /><br />
+            <strong>Taxi / VTC:</strong> Recomendamos reservar con antelación para el regreso.
+          </div>
+        </div>
+      </div>
+
+
+
+      <div class="accordion-item">
+        <button class="accordion-trigger" onclick="toggleAccordion(this)">
+          <div class="accordion-trigger-left">
+            <div class="accordion-icon-wrap"><svg viewBox="0 0 24 24">
+                <path
+                  d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z" />
+              </svg></div><span class="accordion-title">Lista de bodas &amp; regalos</span>
+          </div>
+          <svg class="accordion-chevron" viewBox="0 0 24 24">
+            <path d="M6 9l6 6 6-6" />
+          </svg>
+        </button>
+        <div class="accordion-body">
+          <div class="accordion-body-inner">
+            Vuestra presencia es el mejor regalo. Pero si queréis contribuir a nuestra luna de miel o nuestro nuevo
+            hogar:<br /><br />
+            <strong>IBAN:</strong> ES00 0000 0000 0000 0000 0000<br />
+            <strong>Concepto:</strong> Boda María y Julián
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- RSVP -->
+  <section class="rsvp-section" id="rsvp">
+    <p class="section-label">Nos gustaría verte allí</p>
+    <h2 class="section-title">Confirma tu <em>asistencia</em></h2>
+    <div class="thin-rule"><span></span></div>
+
+    <div class="rsvp-form" id="rsvp-form-wrap">
+
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label">Nombre</label>
+          <input class="form-input" type="text" placeholder="Tu nombre" id="f-name" />
+        </div>
+        <div class="form-group">
+          <label class="form-label">Apellidos</label>
+          <input class="form-input" type="text" placeholder="Tus apellidos" id="f-surname" />
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">¿Asistirás?</label>
+        <div class="attendance-toggle">
+          <button class="toggle-btn selected" id="btn-si" onclick="selectAttendance(this,'yes')">Sí, quiero</button>
+          <button class="toggle-btn-no" onclick="selectAttendance(this,'no')">No podré asistir</button>
+        </div>
+        <input type="hidden" id="f-attendance" value="yes" />
+      </div>
+
+      <!-- campos solo si asiste -->
+      <div id="extra-fields">
+
+        <div class="form-group" style="margin-bottom:1.25rem">
+          <label class="form-label">Número de asistentes</label>
+          <select class="form-select" id="f-guests" onchange="updateCompanions()">
+            <option value="1">Solo yo (1)</option>
+            <option value="2">Somos 2</option>
+            <option value="3">Somos 3</option>
+            <option value="4">Somos 4</option>
+            <option value="5">Somos 5 o más</option>
+          </select>
+        </div>
+
+        <!-- nombres acompañantes — aparece dinámicamente -->
+        <div class="form-group" id="companions-group" style="display:none;margin-bottom:1.25rem">
+          <label class="form-label">Nombre/s de tus acompañantes</label>
+          <div class="companions-wrap" id="companions-wrap"></div>
+        </div>
+
+        <div class="form-group" style="margin-bottom:1.25rem">
+          <label class="form-label">Alergias o intolerancias alimentarias</label>
+          <input class="form-input" type="text"
+            placeholder="Ej: frutos secos, marisco, lactosa… (déjalo vacío si no tienes)" id="f-allergies" />
+        </div>
+
+        <div class="form-group bus-group-wrapper" id="bus-question-wrapper"
+          style="margin-bottom:1.25rem; opacity:1; transform:translateY(0); transition: opacity 0.6s ease, transform 0.6s ease;">
+          <label class="form-label">¿Te vienes en bus?</label>
+          <div class="attendance-toggle" style="margin-bottom: 0.5rem;">
+            <button class="toggle-btn" onclick="selectBus(this,'yes')">Sí, por favor</button>
+            <button class="toggle-btn selected" onclick="selectBus(this,'no')">No, gracias</button>
+          </div>
+          <input type="hidden" id="f-bus" value="no" />
+
+          <div class="bus-options" id="bus-options"
+            style="display:none; flex-direction:column; gap:0.5rem; margin-top:0.5rem; animation: fadeUp 0.5s ease forwards;">
+            <label class="form-label" style="margin-bottom: 0.1rem;">Punto de partida:</label>
+            <select class="form-select" id="f-bus-city" style="width:100%;">
+              <option value="" disabled selected>Selecciona una opción</option>
+              <option value="castellon">Desde Castellón</option>
+              <option value="valencia">Desde Valencia</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group" style="margin-bottom:1.25rem">
+          <label class="form-label">🎵 ¿Cuál es tu canción favorita?</label>
+          <input class="form-input" type="text" placeholder="La que no puede faltar en la pista de baile…"
+            id="f-song" />
+        </div>
+
+      </div><!-- /extra-fields -->
+
+      <div class="form-group">
+        <label class="form-label">Mensaje para los novios (opcional)</label>
+        <textarea class="form-textarea" id="f-message"
+          placeholder="Un deseo, un recuerdo, algo que quieras decirnos…"></textarea>
+      </div>
+
+      <button class="rsvp-submit" onclick="submitRSVP()">Confirmar asistencia</button>
+    </div>
+
+    <div class="rsvp-success" id="rsvp-success">
+      <svg viewBox="0 0 24 24">
+        <path d="M22 11.08V12a10 10 0 11-5.93-9.14" />
+        <polyline points="22 4 12 14.01 9 11.01" />
+      </svg>
+      <h3>¡Nos vemos el 25 de julio!</h3>
+      <p>Hemos recibido tu confirmación.<br />No podemos esperar a compartir este día contigo.<br />Te mandamos todo
+        nuestro amor. 🤍</p>
+    </div>
+  </section>
+  <!-- CARRUSEL -->
+  <section class="section carousel-section" id="galeria">
+    <p class="section-label">Momentos nuestros</p>
+    <h2 class="section-title">Nuestra <em>galería</em></h2>
+    <div class="thin-rule"><span></span></div>
+    <div class="carousel-wrap reveal">
+      <div class="carousel-track" id="carouselTrack" style="cursor: grab;">
+        <div class="carousel-slide active"><img src="img/boda6.jpg.jpeg" alt="Galería"></div>
+        <div class="carousel-slide"><img src="img/boda7.jpg.jpeg" alt="Galería"></div>
+        <div class="carousel-slide"><img src="img/boda8.jpg.jpeg" alt="Galería"></div>
+        <div class="carousel-slide"><img src="img/boda9.jpg.jpeg" alt="Galería"></div>
+        <div class="carousel-slide"><img src="img/boda10.jpg.jpeg" alt="Galería"></div>
+        <div class="carousel-slide"><img src="img/boda11.jpg.jpeg" alt="Galería"></div>
+        <div class="carousel-slide"><img src="img/boda12.jpg.jpeg" alt="Galería"></div>
+      </div>
+      <!-- Flechas eliminadas -->
+    </div>
+    <div class="carousel-dots" id="carouselDots"></div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <p class="footer-names">María &amp; Julián</p>
+    <p class="footer-date">25 · VII · 2026 · Sagunt, Valencia</p>
+    <div class="footer-divider"></div>
+    <p class="footer-note">"El amor no se mira, se vive.<br />Gracias por vivir este momento con nosotros."</p>
+    <div class="footer-hearts"><span></span><span></span><span></span></div>
+  </footer>
+
+  <script>
+    /* ─── CURSOR ─── */
+    const cursor = document.getElementById('cursor'), ring = document.getElementById('cursorRing');
+    let mx = 0, my = 0, rx = 0, ry = 0;
+    document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; cursor.style.left = mx + 'px'; cursor.style.top = my + 'px' });
+    (function aR() { rx += (mx - rx) * .12; ry += (my - ry) * .12; ring.style.left = rx + 'px'; ring.style.top = ry + 'px'; requestAnimationFrame(aR) })();
+    document.querySelectorAll('a,button,.accordion-trigger,.toggle-btn,.toggle-btn-no,.rsvp-submit,.carousel-btn').forEach(el => {
+      el.addEventListener('mouseenter', () => { ring.style.width = '52px'; ring.style.height = '52px'; cursor.style.transform = 'translate(-50%,-50%) scale(1.5)' });
+      el.addEventListener('mouseleave', () => { ring.style.width = '36px'; ring.style.height = '36px'; cursor.style.transform = 'translate(-50%,-50%) scale(1)' });
+    });
+
+    /* ─── PETALS ─── */
+    const canvas = document.getElementById('petalCanvas'), ctx = canvas.getContext('2d');
+    let W, H;
+    function resize() { W = canvas.width = canvas.offsetWidth; H = canvas.height = canvas.offsetHeight }
+    resize(); window.addEventListener('resize', () => { if (document.getElementById('lugar').classList.contains('visible')) { resize() } });
+    const COLS = ['rgba(239,173,85,.55)', 'rgba(227,142,142,.45)', 'rgba(122,154,107,.4)', 'rgba(200,103,51,.35)'];
+    class Petal { constructor() { this.reset(true) } reset(i = false) { this.x = Math.random() * W; this.y = i ? Math.random() * H : -20; this.size = Math.random() * 9 + 4; this.sy = Math.random() * .7 + .25; this.sx = Math.random() * .8 - .4; this.rot = Math.random() * Math.PI * 2; this.rs = (Math.random() - .5) * .025; this.color = COLS[Math.floor(Math.random() * COLS.length)]; this.wave = Math.random() * Math.PI * 2; this.ws = Math.random() * .018 + .004; this.op = Math.random() * .45 + .25 } draw() { ctx.save(); ctx.translate(this.x, this.y); ctx.rotate(this.rot); ctx.beginPath(); ctx.ellipse(0, 0, this.size, this.size * .45, 0, 0, Math.PI * 2); ctx.fillStyle = this.color; ctx.globalAlpha = this.op; ctx.fill(); ctx.restore() } update() { this.wave += this.ws; this.x += this.sx + Math.sin(this.wave) * .5; this.y += this.sy; this.rot += this.rs; if (this.y > H + 40 || this.x < -50 || this.x > W + 50) this.reset() } }
+    const petals = Array.from({ length: 40 }, () => new Petal());
+
+    let runPetals = false;
+    const petalOb = new IntersectionObserver(e => { runPetals = e[0].isIntersecting; if (runPetals) resize(); }, { threshold: 0 });
+    if (document.getElementById('lugar')) petalOb.observe(document.getElementById('lugar'));
+
+    (function lp() {
+      if (runPetals) {
+        ctx.clearRect(0, 0, W, H);
+        petals.forEach(p => { p.update(); p.draw() });
+      }
+      requestAnimationFrame(lp);
+    })();
+
+    /* ─── COUNTDOWN ─── */
+    function tick() { const diff = new Date('2026-07-25T12:00:00') - new Date(); if (diff <= 0) return; const d = Math.floor(diff / 864e5), h = Math.floor(diff % 864e5 / 36e5), m = Math.floor(diff % 36e5 / 6e4), s = Math.floor(diff % 6e4 / 1e3); document.getElementById('cd-days').textContent = String(d).padStart(3, '0'); document.getElementById('cd-hours').textContent = String(h).padStart(2, '0'); document.getElementById('cd-mins').textContent = String(m).padStart(2, '0'); document.getElementById('cd-secs').textContent = String(s).padStart(2, '0') }
+    tick(); setInterval(tick, 1000);
+
+    /* ─── SCROLL ─── */
+    const navbar = document.getElementById('navbar'), pb = document.getElementById('progress-bar');
+    window.addEventListener('scroll', () => {
+      const st = window.scrollY;
+      navbar.classList.toggle('scrolled', st > 80);
+      pb.style.width = (st / (document.documentElement.scrollHeight - window.innerHeight) * 100) + '%';
+    });
+
+    /* ─── REVEAL ─── */
+    const io = new IntersectionObserver(e => e.forEach(x => { if (x.isIntersecting) x.target.classList.add('visible') }), { threshold: .1 });
+    document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .timeline-item').forEach(el => io.observe(el));
+
+    /* ─── ACCORDION ─── */
+    function toggleAccordion(btn) {
+      const item = btn.closest('.accordion-item'), body = item.querySelector('.accordion-body'), open = item.classList.contains('open');
+      document.querySelectorAll('.accordion-item.open').forEach(i => { i.classList.remove('open'); i.querySelector('.accordion-body').style.maxHeight = '0' });
+      if (!open) { item.classList.add('open'); body.style.maxHeight = body.scrollHeight + 'px' }
+    }
+
+    /* ─── CAROUSEL ─── */
+    let cur = 0;
+    const track = document.getElementById('carouselTrack'), slides = track.querySelectorAll('.carousel-slide'), dotsW = document.getElementById('carouselDots'), tot = slides.length;
+    slides.forEach((_, i) => { const d = document.createElement('button'); d.className = 'carousel-dot' + (i === 0 ? ' active' : ''); d.addEventListener('click', () => go(i)); dotsW.appendChild(d) });
+    function go(n) { cur = (n + tot) % tot; track.scrollTo({ left: track.offsetWidth * cur, behavior: 'smooth' }); updateDots() }
+    function updateDots() { Array.from(dotsW.children).forEach((d, i) => d.classList.toggle('active', i === cur)) }
+    
+    track.addEventListener('scroll', () => {
+      const newCur = Math.round(track.scrollLeft / track.offsetWidth);
+      if (newCur !== cur) { cur = newCur; updateDots() }
+    });
+
+    let autoS = setInterval(() => go(cur + 1), 2000);
+    track.addEventListener('mouseenter', () => clearInterval(autoS));
+    track.addEventListener('mouseleave', () => { autoS = setInterval(() => go(cur + 1), 2000) });
+    
+    let tX = 0; track.addEventListener('touchstart', e => tX = e.touches[0].clientX, { passive: true });
+    track.addEventListener('touchend', e => { const dx = e.changedTouches[0].clientX - tX; if (Math.abs(dx) > 40) go(dx < 0 ? cur + 1 : cur - 1) }, { passive: true });
+
+    /* ─── RSVP ─── */
+    function selectAttendance(btn, val) {
+      btn.closest('.attendance-toggle').querySelectorAll('button').forEach(b => b.classList.remove('selected'));
+      btn.classList.add('selected');
+      document.getElementById('f-attendance').value = val;
+
+      const extras = document.getElementById('extra-fields');
+      const busWrapper = document.getElementById('bus-question-wrapper');
+
+      if (val === 'yes') {
+        extras.style.display = 'block';
+        updateCompanions();
+
+        setTimeout(() => {
+          busWrapper.style.opacity = '1';
+          busWrapper.style.transform = 'translateY(0)';
+        }, 400);
+      } else {
+        extras.style.display = 'none';
+        busWrapper.style.opacity = '0';
+        busWrapper.style.transform = 'translateY(10px)';
+
+        const busOpts = document.getElementById('bus-options');
+        busOpts.style.display = 'none';
+      }
+    }
+
+    function selectBus(btn, val) {
+      btn.closest('.attendance-toggle').querySelectorAll('button').forEach(b => b.classList.remove('selected'));
+      btn.classList.add('selected');
+      document.getElementById('f-bus').value = val;
+
+      const busOpts = document.getElementById('bus-options');
+      if (val === 'yes') {
+        busOpts.style.display = 'flex';
+      } else {
+        busOpts.style.display = 'none';
+      }
+    }
+
+    function updateCompanions() {
+      const n = parseInt(document.getElementById('f-guests').value) || 1;
+      const grp = document.getElementById('companions-group');
+      const wrap = document.getElementById('companions-wrap');
+      if (n <= 1) { grp.style.display = 'none'; wrap.innerHTML = ''; return }
+      grp.style.display = 'block';
+      wrap.innerHTML = '';
+      for (let i = 1; i < n; i++) {
+        const label = document.createElement('label');
+        label.className = 'companion-label-inline';
+        label.textContent = `Acompañante ${i}`;
+        const inp = document.createElement('input');
+        inp.type = 'text'; inp.className = 'form-input'; inp.id = `companion-${i}`;
+        inp.placeholder = `Nombre completo del acompañante ${i}`;
+        inp.style.marginTop = '.3rem';
+        const wrap2 = document.createElement('div');
+        wrap2.appendChild(label); wrap2.appendChild(inp);
+        wrap.appendChild(wrap2);
+      }
+    }
+
+    function submitRSVP() {
+      const n = document.getElementById('f-name').value.trim();
+      const s = document.getElementById('f-surname').value.trim();
+      let ok = true;
+      if (!n) { document.getElementById('f-name').classList.add('error'); ok = false } else { document.getElementById('f-name').classList.remove('error') }
+      if (!s) { document.getElementById('f-surname').classList.add('error'); ok = false } else { document.getElementById('f-surname').classList.remove('error') }
+      // validate companions if attending
+      if (document.getElementById('f-attendance').value === 'yes') {
+        const num = parseInt(document.getElementById('f-guests').value) || 1;
+        for (let i = 1; i < num; i++) {
+          const c = document.getElementById(`companion-${i}`);
+          if (c && !c.value.trim()) { c.classList.add('error'); ok = false } else if (c) { c.classList.remove('error') }
+        }
+      }
+      if (!ok) {
+        setTimeout(() => document.querySelectorAll('.error').forEach(el => el.classList.remove('error')), 2500);
+        return;
+      }
+      document.getElementById('rsvp-form-wrap').style.display = 'none';
+      const succ = document.getElementById('rsvp-success');
+      succ.style.display = 'flex'; succ.style.opacity = '0'; succ.style.transform = 'translateY(20px)';
+      setTimeout(() => { succ.style.transition = 'all .7s ease'; succ.style.opacity = '1'; succ.style.transform = 'translateY(0)' }, 50);
+    }
+  </script>
+</body>
+
+</html>
