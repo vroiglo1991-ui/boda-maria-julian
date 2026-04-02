@@ -2429,26 +2429,28 @@
     <h2 class="section-title">Confirma tu <em>asistencia</em></h2>
     <div class="thin-rule"><span></span></div>
 
-    <div class="rsvp-form" id="rsvp-form-wrap">
+    <form class="rsvp-form" id="rsvp-form-wrap" name="RSVPA" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+      <input type="hidden" name="form-name" value="RSVPA" />
+      <p style="display:none"><label>No llenes esto: <input name="bot-field" /></label></p>
 
       <div class="form-row">
         <div class="form-group">
           <label class="form-label">Nombre</label>
-          <input class="form-input" type="text" placeholder="Tu nombre" id="f-name" />
+          <input class="form-input" type="text" placeholder="Tu nombre" id="f-name" name="Nombre" />
         </div>
         <div class="form-group">
           <label class="form-label">Apellidos</label>
-          <input class="form-input" type="text" placeholder="Tus apellidos" id="f-surname" />
+          <input class="form-input" type="text" placeholder="Tus apellidos" id="f-surname" name="Apellidos" />
         </div>
       </div>
 
       <div class="form-group">
         <label class="form-label">¿Asistirás?</label>
         <div class="attendance-toggle">
-          <button class="toggle-btn selected" id="btn-si" onclick="selectAttendance(this,'yes')">Sí, quiero</button>
-          <button class="toggle-btn-no" onclick="selectAttendance(this,'no')">Tú te lo pierdes</button>
+          <button type="button" class="toggle-btn selected" id="btn-si" onclick="selectAttendance(this,'yes')">Sí, quiero</button>
+          <button type="button" class="toggle-btn-no" onclick="selectAttendance(this,'no')">Tú te lo pierdes</button>
         </div>
-        <input type="hidden" id="f-attendance" value="yes" />
+        <input type="hidden" id="f-attendance" name="Asistencia" value="yes" />
       </div>
 
       <!-- campos solo si asiste -->
@@ -2456,7 +2458,7 @@
 
         <div class="form-group" style="margin-bottom:1.25rem">
           <label class="form-label">Número de asistentes</label>
-          <select class="form-select" id="f-guests" onchange="updateCompanions()">
+          <select class="form-select" id="f-guests" name="Numero_asistentes" onchange="updateCompanions()">
             <option value="1">Solo yo (1)</option>
             <option value="2">Somos 2</option>
             <option value="3">Somos 3</option>
@@ -2474,22 +2476,22 @@
         <div class="form-group" style="margin-bottom:1.25rem">
           <label class="form-label">Alergias o intolerancias alimentarias</label>
           <input class="form-input" type="text"
-            placeholder="Ej: frutos secos, marisco, lactosa… (déjalo vacío si no tienes)" id="f-allergies" />
+            placeholder="Ej: frutos secos, marisco, lactosa… (déjalo vacío si no tienes)" id="f-allergies" name="Alergias" />
         </div>
 
         <div class="form-group bus-group-wrapper" id="bus-question-wrapper"
           style="margin-bottom:1.25rem; opacity:1; transform:translateY(0); transition: opacity 0.6s ease, transform 0.6s ease;">
           <label class="form-label">¿Te vienes en bus?</label>
           <div class="attendance-toggle" style="margin-bottom: 0.5rem;">
-            <button class="toggle-btn" onclick="selectBus(this,'yes')">Sí, por favor</button>
-            <button class="toggle-btn selected" onclick="selectBus(this,'no')">No, gracias</button>
+            <button type="button" class="toggle-btn" onclick="selectBus(this,'yes')">Sí, por favor</button>
+            <button type="button" class="toggle-btn selected" onclick="selectBus(this,'no')">No, gracias</button>
           </div>
-          <input type="hidden" id="f-bus" value="no" />
+          <input type="hidden" id="f-bus" name="Necesita_bus" value="no" />
 
           <div class="bus-options" id="bus-options"
             style="display:none; flex-direction:column; gap:0.5rem; margin-top:0.5rem; animation: fadeUp 0.5s ease forwards;">
             <label class="form-label" style="margin-bottom: 0.1rem;">Punto de partida:</label>
-            <select class="form-select" id="f-bus-city" style="width:100%;">
+            <select class="form-select" id="f-bus-city" name="Punto_salida_bus" style="width:100%;">
               <option value="" disabled selected>Selecciona una opción</option>
               <option value="castellon">Desde Castellón</option>
               <option value="valencia">Desde Valencia</option>
@@ -2500,19 +2502,19 @@
         <div class="form-group" style="margin-bottom:1.25rem">
           <label class="form-label">🎵 ¿Cuál es tu canción favorita?</label>
           <input class="form-input" type="text" placeholder="La que no puede faltar en la pista de baile…"
-            id="f-song" />
+            id="f-song" name="Cancion_favorita" />
         </div>
 
       </div><!-- /extra-fields -->
 
       <div class="form-group">
         <label class="form-label">Mensaje para los novios (opcional)</label>
-        <textarea class="form-textarea" id="f-message"
+        <textarea class="form-textarea" id="f-message" name="Mensaje"
           placeholder="Un deseo, un recuerdo, algo que quieras decirnos…"></textarea>
       </div>
 
-      <button class="rsvp-submit" onclick="submitRSVP()">Confirmar asistencia</button>
-    </div>
+      <button type="submit" class="rsvp-submit">Confirmar asistencia</button>
+    </form>
 
     <div class="rsvp-success" id="rsvp-success">
       <svg viewBox="0 0 24 24">
@@ -2672,6 +2674,7 @@
         label.textContent = `Acompañante ${i}`;
         const inp = document.createElement('input');
         inp.type = 'text'; inp.className = 'form-input'; inp.id = `companion-${i}`;
+        inp.name = `Acompañante_${i}`;
         inp.placeholder = `Nombre completo del acompañante ${i}`;
         inp.style.marginTop = '.3rem';
         const wrap2 = document.createElement('div');
@@ -2680,28 +2683,45 @@
       }
     }
 
-    function submitRSVP() {
-      const n = document.getElementById('f-name').value.trim();
-      const s = document.getElementById('f-surname').value.trim();
-      let ok = true;
-      if (!n) { document.getElementById('f-name').classList.add('error'); ok = false } else { document.getElementById('f-name').classList.remove('error') }
-      if (!s) { document.getElementById('f-surname').classList.add('error'); ok = false } else { document.getElementById('f-surname').classList.remove('error') }
-      // validate companions if attending
-      if (document.getElementById('f-attendance').value === 'yes') {
-        const num = parseInt(document.getElementById('f-guests').value) || 1;
-        for (let i = 1; i < num; i++) {
-          const c = document.getElementById(`companion-${i}`);
-          if (c && !c.value.trim()) { c.classList.add('error'); ok = false } else if (c) { c.classList.remove('error') }
+    const rsvpForm = document.getElementById('rsvp-form-wrap');
+    if (rsvpForm) {
+      rsvpForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        const n = document.getElementById('f-name').value.trim();
+        const s = document.getElementById('f-surname').value.trim();
+        let ok = true;
+        if (!n) { document.getElementById('f-name').classList.add('error'); ok = false } else { document.getElementById('f-name').classList.remove('error') }
+        if (!s) { document.getElementById('f-surname').classList.add('error'); ok = false } else { document.getElementById('f-surname').classList.remove('error') }
+        
+        if (document.getElementById('f-attendance').value === 'yes') {
+          const num = parseInt(document.getElementById('f-guests').value) || 1;
+          for (let i = 1; i < num; i++) {
+            const c = document.getElementById(`companion-${i}`);
+            if (c && !c.value.trim()) { c.classList.add('error'); ok = false } else if (c) { c.classList.remove('error') }
+          }
         }
-      }
-      if (!ok) {
-        setTimeout(() => document.querySelectorAll('.error').forEach(el => el.classList.remove('error')), 2500);
-        return;
-      }
-      document.getElementById('rsvp-form-wrap').style.display = 'none';
-      const succ = document.getElementById('rsvp-success');
-      succ.style.display = 'flex'; succ.style.opacity = '0'; succ.style.transform = 'translateY(20px)';
-      setTimeout(() => { succ.style.transition = 'all .7s ease'; succ.style.opacity = '1'; succ.style.transform = 'translateY(0)' }, 50);
+        
+        if (!ok) {
+          setTimeout(() => document.querySelectorAll('.error').forEach(el => el.classList.remove('error')), 2500);
+          return;
+        }
+        
+        const formData = new FormData(rsvpForm);
+        
+        fetch("/", {
+          method: "POST",
+          headers: { "Content-Type": "application/x-www-form-urlencoded" },
+          body: new URLSearchParams(formData).toString()
+        })
+        .then(() => {
+          document.getElementById('rsvp-form-wrap').style.display = 'none';
+          const succ = document.getElementById('rsvp-success');
+          succ.style.display = 'flex'; succ.style.opacity = '0'; succ.style.transform = 'translateY(20px)';
+          setTimeout(() => { succ.style.transition = 'all .7s ease'; succ.style.opacity = '1'; succ.style.transform = 'translateY(0)' }, 50);
+        })
+        .catch((error) => console.error("Error al enviar el formulario:", error));
+      });
     }
   </script>
   <script>
