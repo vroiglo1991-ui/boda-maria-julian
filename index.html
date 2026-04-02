@@ -2516,14 +2516,19 @@
       <button type="submit" class="rsvp-submit">Confirmar asistencia</button>
     </form>
 
-    <div class="rsvp-success" id="rsvp-success">
+    <div class="rsvp-success" id="rsvp-success" style="align-items: center; justify-content: center; text-align: center;">
       <svg viewBox="0 0 24 24">
         <path d="M22 11.08V12a10 10 0 11-5.93-9.14" />
         <polyline points="22 4 12 14.01 9 11.01" />
       </svg>
-      <h3>¡Nos vemos el 25 de julio!</h3>
-      <p>Hemos recibido tu confirmación.<br />No podemos esperar a compartir este día contigo.<br />Te mandamos todo
-        nuestro amor. 🤍</p>
+      <h3 id="rsvp-succ-title">¡Nos vemos el 25 de julio!</h3>
+      <p id="rsvp-succ-text">Hemos recibido tu confirmación.<br />No podemos esperar a compartir este día contigo.<br />Te mandamos todo nuestro amor. 🤍</p>
+      
+      <div id="calendar-links" style="display:none; flex-direction:column; gap:0.8rem; margin-top:2rem; width:100%; max-width:300px; padding-top: 1rem; border-top: 1px solid rgba(239, 173, 85, 0.4);">
+        <p style="font-family:var(--ff-b); font-size:0.8rem; text-transform:uppercase; letter-spacing:0.1em; color:var(--mid); margin-bottom: 0.5rem;">Añadir al calendario</p>
+        <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Boda+Mar%C3%ADa+y+Juli%C3%A1n&dates=20260725T163000Z/20260726T040000Z&details=Celebra+con+nosotros+este+d%C3%ADa+tan+especial.&location=Mas+Les+Lloses,+Carrer+Cam%C3%AD+de+Lliria,+46500+Sagunt,+Valencia" target="_blank" style="background:var(--burgundy); color:white; font-family:var(--ff-d); padding:0.8rem; text-decoration:none; text-align:center; transition:background 0.3s; border-radius: 4px;" onmouseover="this.style.background='var(--dark)'" onmouseout="this.style.background='var(--burgundy)'">Google Calendar</a>
+        <a href="data:text/calendar;charset=utf8,BEGIN:VCALENDAR%0AVERSION:2.0%0ABEGIN:VEVENT%0AURL:https://boda-maria-julian.netlify.app/%0ADTSTART:20260725T163000Z%0ADTEND:20260726T040000Z%0ASUMMARY:Boda%20Mar%C3%ADa%20y%20Juli%C3%A1n%0ADESCRIPTION:Celebra%20con%20nosotros%20este%20d%C3%ADa%20tan%20especial.%0ALOCATION:Mas%20Les%20Lloses%2C%20Carrer%20Cam%C3%AD%20de%20Lliria%2C%2046500%20Sagunt%2C%20Valencia%0AEND:VEVENT%0AEND:VCALENDAR" download="boda-maria-julian.ics" style="border:1px solid var(--burgundy); color:var(--burgundy); font-family:var(--ff-d); padding:0.8rem; text-decoration:none; text-align:center; transition:all 0.3s; background:transparent; border-radius: 4px;" onmouseover="this.style.background='var(--burgundy)'; this.style.color='white'" onmouseout="this.style.background='transparent'; this.style.color='var(--burgundy)'">Apple Calendar</a>
+      </div>
     </div>
   </section>
 
@@ -2716,6 +2721,15 @@
         })
         .then(() => {
           document.getElementById('rsvp-form-wrap').style.display = 'none';
+          
+          if (document.getElementById('f-attendance').value === 'no') {
+             document.getElementById('rsvp-succ-title').innerText = "¡Te echaremos de menos!";
+             document.getElementById('rsvp-succ-text').innerHTML = "Hemos recibido tu mensaje.<br />Sentimos mucho que no puedas acompañarnos, pero brindaremos por ti. 🤍";
+          } else {
+             const cal = document.getElementById('calendar-links');
+             if (cal) cal.style.display = 'flex';
+          }
+
           const succ = document.getElementById('rsvp-success');
           succ.style.display = 'flex'; succ.style.opacity = '0'; succ.style.transform = 'translateY(20px)';
           setTimeout(() => { succ.style.transition = 'all .7s ease'; succ.style.opacity = '1'; succ.style.transform = 'translateY(0)' }, 50);
