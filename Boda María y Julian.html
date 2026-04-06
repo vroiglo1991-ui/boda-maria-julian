@@ -2061,7 +2061,43 @@
         height: 30px
       }
     }
+
+    /* ESTILOS SWIPER COVERFLOW */
+    .union-swiper {
+      width: 100%;
+      padding-top: 2rem;
+      padding-bottom: 3rem;
+    }
+
+    .union-swiper .swiper-slide {
+      background-position: center;
+      background-size: cover;
+      width: 260px;
+      height: 360px;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+    }
+
+    @media(min-width:768px) {
+      .union-swiper .swiper-slide {
+        width: 360px;
+        height: 500px;
+      }
+    }
+
+    .union-swiper .swiper-slide img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .union-swiper .swiper-pagination-bullet {
+      background: var(--gold);
+    }
   </style>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
 </head>
 
 <body>
@@ -2132,14 +2168,23 @@
 
   <!-- UNION DE CIUDADES -->
   <section class="cities-section" id="union">
-    <div class="cities-content reveal">
+    <div class="cities-content reveal" style="max-width: 100vw; overflow: hidden;">
       <p class="cities-eyebrow">Dos Orígenes, Un Destino</p>
       <h2 class="cities-headline">La unión de <em>Castellón</em> y <em>Valencia</em></h2>
-      <p class="cities-sub" style="margin-bottom:3rem; font-size:1.1rem;">Kilómetros que se reducen a cero.</p>
+      <p class="cities-sub" style="margin-bottom:1rem; font-size:1.1rem;">Kilómetros que se reducen a cero.</p>
 
-      <div class="cities-big-image reveal"
-        style="width:100%; border-radius:8px; overflow:hidden; box-shadow:0 15px 40px rgba(0,0,0,0.3);">
-        <img src="img/boda5.jpg.jpeg" alt="La Unión" style="width:100%; height:90vh; object-fit:cover; display:block;">
+      <div class="swiper union-swiper reveal" style="opacity:0; transition:opacity 1s ease;">
+        <div class="swiper-wrapper">
+          <div class="swiper-slide"><img src="img/boda13.jpg.jpg" alt="A y J"></div>
+          <div class="swiper-slide"><img src="img/boda14.jpg.jpg" alt="A y J"></div>
+          <div class="swiper-slide"><img src="img/boda22.jpg.jpg" alt="A y J"></div>
+          <div class="swiper-slide"><img src="img/Boda17.jpg.jpg" alt="A y J"></div>
+          <div class="swiper-slide"><img src="img/Boda18.jpg.jpg" alt="A y J"></div>
+          <div class="swiper-slide"><img src="img/boda16.jpg.jpg" alt="A y J"></div>
+          <div class="swiper-slide"><img src="img/boda21.jpg.jpg" alt="A y J"></div>
+          <div class="swiper-slide"><img src="img/boda20.jpg.jpg" alt="A y J"></div>
+        </div>
+        <div class="swiper-pagination"></div>
       </div>
     </div>
   </section>
@@ -2761,8 +2806,40 @@
             if (e.isIntersecting) e.target.classList.add('in-view');
           });
         }, { threshold: 0.15 });
-        document.querySelectorAll('.event-item').forEach(el => observer.observe(el));
       }
+    });
+  </script>
+
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const swiperContainer = document.querySelector('.union-swiper');
+      if (swiperContainer) {
+        setTimeout(() => { swiperContainer.style.opacity = '1'; }, 300);
+      }
+      
+      new Swiper('.union-swiper', {
+        effect: 'coverflow',
+        grabCursor: true,
+        centeredSlides: true,
+        slidesPerView: 'auto',
+        coverflowEffect: {
+          rotate: 35,
+          stretch: 0,
+          depth: 100,
+          modifier: 1,
+          slideShadows: true,
+        },
+        loop: true,
+        autoplay: {
+          delay: 3500,
+          disableOnInteraction: false,
+        },
+        pagination: {
+          el: '.swiper-pagination',
+          clickable: true,
+        },
+      });
     });
   </script>
 </body>
