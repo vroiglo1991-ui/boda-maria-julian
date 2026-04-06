@@ -2806,6 +2806,7 @@
             if (e.isIntersecting) e.target.classList.add('in-view');
           });
         }, { threshold: 0.15 });
+        document.querySelectorAll('.event-item').forEach(el => observer.observe(el));
       }
     });
   </script>
